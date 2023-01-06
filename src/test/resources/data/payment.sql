@@ -1,0 +1,1 @@
+insert into payment_entity(id, order_id, card_holder_name, card_number, expiry_month, expiry_year, paid) values ('10fd6267-ea74-4c29-be97-7fc5c81241a5', 'a41c9394-3aa6-4484-b0b4-87de55fa2cf4', 'Michael Faraday', '11223344', 0, 2023, current_timestamp);

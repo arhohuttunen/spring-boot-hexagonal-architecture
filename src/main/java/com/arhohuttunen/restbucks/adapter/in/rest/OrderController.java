@@ -1,0 +1,52 @@
+package com.arhohuttunen.restbucks.adapter.in.rest;
+
+import com.arhohuttunen.restbucks.adapter.in.rest.resource.OrderRequest;
+import com.arhohuttunen.restbucks.adapter.in.rest.resource.OrderResponse;
+import com.arhohuttunen.restbucks.application.in.CancelOrder;
+import com.arhohuttunen.restbucks.application.in.CreateOrder;
+import com.arhohuttunen.restbucks.application.in.ReadOrder;
+import com.arhohuttunen.restbucks.application.in.UpdateOrder;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import java.util.UUID;
+
+@Controller
+@RequiredArgsConstructor
+public class OrderController {
+    private final CreateOrder createOrder;
+    private final UpdateOrder updateOrder;
+    private final ReadOrder readOrder;
+    private final CancelOrder cancelOrder;
+
+    @PostMapping("/order")
+    ResponseEntity<OrderResponse> createOrder(@RequestBody OrderRequest request, UriComponentsBuilder uriComponentsBuilder) {
+        var order = createOrder.createOrder(request.toDomain());
+        var location = uriComponentsBuilder.path("/order/{id}").buildAndExpand(order.getId()).toUri();
+        return ResponseEntity.created(location).body(OrderResponse.fromDomain(order));
+    }
+
+    @PostMapping("/order/{id}")
+    ResponseEntity<OrderResponse> updateOrder(@PathVariable UUID id, @RequestBody OrderRequest request) {
+        var order = updateOrder.updateOrder(id, request.toDomain());
+        return ResponseEntity.ok(OrderResponse.fromDomain(order));
+    }
+
+    @GetMapping("/order/{id}")
+    ResponseEntity<OrderResponse> readOrder(@PathVariable UUID id) {
+        var order = readOrder.readOrder(id);
+        return ResponseEntity.ok(OrderResponse.fromDomain(order));
+    }
+    @DeleteMapping("/order/{id}")
+    ResponseEntity<Void> cancelOrder(@PathVariable UUID id) {
+        cancelOrder.cancelOrder(id);
+        return ResponseEntity.noContent().build();
+    }
+}
