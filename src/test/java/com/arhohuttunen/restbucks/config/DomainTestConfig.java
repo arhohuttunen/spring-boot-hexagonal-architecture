@@ -6,10 +6,10 @@ import com.arhohuttunen.restbucks.application.out.Orders;
 import com.arhohuttunen.restbucks.application.out.Payments;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Import;
 
 @TestConfiguration
-@ComponentScan("com.arhohuttunen.restbucks.application")
+@Import(DomainConfig.class)
 public class DomainTestConfig {
     @Bean
     Orders orders() {
