@@ -2,22 +2,45 @@ package com.arhohuttunen.restbucks.application.order;
 
 import com.arhohuttunen.restbucks.shared.Location;
 import com.arhohuttunen.restbucks.shared.Status;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
-@AllArgsConstructor
-@RequiredArgsConstructor
-@Getter
 public class Order {
     private UUID id = UUID.randomUUID();
     private final Location location;
     private final List<OrderItem> items;
     private Status status = Status.PAYMENT_EXPECTED;
+
+    public Order(Location location, List<OrderItem> items) {
+        this.location = location;
+        this.items = items;
+    }
+
+    public Order(UUID id, Location location, List<OrderItem> items, Status status) {
+        this.id = id;
+        this.location = location;
+        this.items = items;
+        this.status = status;
+    }
+
+    public UUID getId() {
+        return this.id;
+    }
+
+    public Location getLocation() {
+        return this.location;
+    }
+
+    public List<OrderItem> getItems() {
+        return Collections.unmodifiableList(this.items);
+    }
+
+    public Status getStatus() {
+        return this.status;
+    }
 
     public boolean isUnpaid() {
         return status == Status.PAYMENT_EXPECTED;

@@ -16,16 +16,19 @@ import com.arhohuttunen.restbucks.application.payment.CreditCard;
 import com.arhohuttunen.restbucks.application.payment.Payment;
 import com.arhohuttunen.restbucks.application.payment.Receipt;
 import com.arhohuttunen.restbucks.shared.DomainService;
-import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.UUID;
 
 @DomainService
-@RequiredArgsConstructor
 public class CoffeeShop implements CreateOrder, ReadOrder, UpdateOrder, CancelOrder, PayOrder, ReadReceipt, StartPreparingOrder, FinishPreparingOrder, CompleteOrder {
     private final Orders orders;
     private final Payments payments;
+
+    public CoffeeShop(Orders orders, Payments payments) {
+        this.orders = orders;
+        this.payments = payments;
+    }
 
     @Override
     public Order createOrder(Order order) {
