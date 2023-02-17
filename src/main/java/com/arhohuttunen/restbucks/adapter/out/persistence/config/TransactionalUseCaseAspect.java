@@ -1,6 +1,6 @@
 package com.arhohuttunen.restbucks.adapter.out.persistence.config;
 
-import com.arhohuttunen.restbucks.shared.DomainService;
+import com.arhohuttunen.architecture.UseCase;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -9,18 +9,18 @@ import org.aspectj.lang.annotation.Pointcut;
 
 @Aspect
 @RequiredArgsConstructor
-public class TransactionalDomainServiceAspect {
+public class TransactionalUseCaseAspect {
 
-    private final TransactionalDomainServiceExecutor transactionalDomainServiceExecutor;
+    private final TransactionalUseCaseExecutor transactionalUseCaseExecutor;
 
-    @Pointcut("@within(domainService)")
-    void inDomainService(DomainService domainService) {
+    @Pointcut("@within(useCase)")
+    void inUseCase(UseCase useCase) {
 
     }
 
-    @Around("inDomainService(domainService)")
-    Object domainService(ProceedingJoinPoint proceedingJoinPoint, DomainService domainService) {
-        return transactionalDomainServiceExecutor.executeInTransaction(() -> {
+    @Around("inUseCase(useCase)")
+    Object useCase(ProceedingJoinPoint proceedingJoinPoint, UseCase useCase) {
+        return transactionalUseCaseExecutor.executeInTransaction(() -> {
             try {
                 return proceedingJoinPoint.proceed();
             } catch (Throwable e) {

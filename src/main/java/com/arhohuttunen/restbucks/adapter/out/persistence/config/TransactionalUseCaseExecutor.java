@@ -4,7 +4,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.function.Supplier;
 
-public class TransactionalDomainServiceExecutor {
+public class TransactionalUseCaseExecutor {
     @Transactional
     <T> T executeInTransaction(Supplier<T> execution) {
         return execution.get();

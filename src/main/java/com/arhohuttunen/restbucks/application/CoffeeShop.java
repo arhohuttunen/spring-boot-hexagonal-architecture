@@ -8,12 +8,12 @@ import com.arhohuttunen.restbucks.application.out.Payments;
 import com.arhohuttunen.restbucks.application.payment.CreditCard;
 import com.arhohuttunen.restbucks.application.payment.Payment;
 import com.arhohuttunen.restbucks.application.payment.Receipt;
-import com.arhohuttunen.restbucks.shared.DomainService;
+import com.arhohuttunen.architecture.UseCase;
 
 import java.time.LocalDate;
 import java.util.UUID;
 
-@DomainService
+@UseCase
 public class CoffeeShop implements OrderingCoffee, PreparingCoffee {
     private final Orders orders;
     private final Payments payments;
