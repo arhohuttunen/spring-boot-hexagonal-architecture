@@ -1,14 +1,7 @@
 package com.arhohuttunen.restbucks.application;
 
-import com.arhohuttunen.restbucks.application.in.CancelOrder;
-import com.arhohuttunen.restbucks.application.in.CompleteOrder;
-import com.arhohuttunen.restbucks.application.in.CreateOrder;
-import com.arhohuttunen.restbucks.application.in.FinishPreparingOrder;
-import com.arhohuttunen.restbucks.application.in.PayOrder;
-import com.arhohuttunen.restbucks.application.in.ReadOrder;
-import com.arhohuttunen.restbucks.application.in.ReadReceipt;
-import com.arhohuttunen.restbucks.application.in.StartPreparingOrder;
-import com.arhohuttunen.restbucks.application.in.UpdateOrder;
+import com.arhohuttunen.restbucks.application.in.OrderingCoffee;
+import com.arhohuttunen.restbucks.application.in.PreparingCoffee;
 import com.arhohuttunen.restbucks.application.order.Order;
 import com.arhohuttunen.restbucks.application.out.Orders;
 import com.arhohuttunen.restbucks.application.out.Payments;
@@ -21,7 +14,7 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 @DomainService
-public class CoffeeShop implements CreateOrder, ReadOrder, UpdateOrder, CancelOrder, PayOrder, ReadReceipt, StartPreparingOrder, FinishPreparingOrder, CompleteOrder {
+public class CoffeeShop implements OrderingCoffee, PreparingCoffee {
     private final Orders orders;
     private final Payments payments;
 

@@ -2,8 +2,7 @@ package com.arhohuttunen.restbucks.adapter.in.rest;
 
 import com.arhohuttunen.restbucks.adapter.in.rest.resource.OrderResponse;
 import com.arhohuttunen.restbucks.adapter.in.rest.resource.ReceiptResponse;
-import com.arhohuttunen.restbucks.application.in.CompleteOrder;
-import com.arhohuttunen.restbucks.application.in.ReadReceipt;
+import com.arhohuttunen.restbucks.application.in.OrderingCoffee;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -16,18 +15,17 @@ import java.util.UUID;
 @Controller
 @RequiredArgsConstructor
 public class ReceiptController {
-    private final ReadReceipt readReceipt;
-    private final CompleteOrder completeOrder;
+    private final OrderingCoffee orderingCoffee;
 
     @GetMapping("/receipt/{id}")
     ResponseEntity<ReceiptResponse> readReceipt(@PathVariable UUID id) {
-        var receipt = readReceipt.readReceipt(id);
+        var receipt = orderingCoffee.readReceipt(id);
         return ResponseEntity.ok(ReceiptResponse.fromDomain(receipt));
     }
 
     @DeleteMapping("/receipt/{id}")
     ResponseEntity<OrderResponse> completeOrder(@PathVariable UUID id) {
-        var order = completeOrder.completeOrder(id);
+        var order = orderingCoffee.completeOrder(id);
         return ResponseEntity.ok(OrderResponse.fromDomain(order));
     }
 }

@@ -2,7 +2,7 @@ package com.arhohuttunen.restbucks.adapter.in.rest;
 
 import com.arhohuttunen.restbucks.adapter.in.rest.resource.PaymentRequest;
 import com.arhohuttunen.restbucks.adapter.in.rest.resource.PaymentResponse;
-import com.arhohuttunen.restbucks.application.in.PayOrder;
+import com.arhohuttunen.restbucks.application.in.OrderingCoffee;
 import com.arhohuttunen.restbucks.application.payment.CreditCard;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -19,11 +19,11 @@ import java.util.UUID;
 @Controller
 @RequiredArgsConstructor
 public class PaymentController {
-    private final PayOrder payOrder;
+    private final OrderingCoffee orderingCoffee;
 
     @PutMapping("/payment/{id}")
     ResponseEntity<PaymentResponse> payOrder(@PathVariable UUID id, @Valid @RequestBody PaymentRequest request) {
-        var payment = payOrder.payOrder(id, new CreditCard(request.cardHolderName(), request.cardNumber(), Month.of(request.expiryMonth()), Year.of(request.expiryYear())));
+        var payment = orderingCoffee.payOrder(id, new CreditCard(request.cardHolderName(), request.cardNumber(), Month.of(request.expiryMonth()), Year.of(request.expiryYear())));
         return ResponseEntity.ok(PaymentResponse.fromDomain(payment));
     }
 }
