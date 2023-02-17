@@ -17,9 +17,10 @@ class AcceptanceTests {
 
     @BeforeEach
     void setup() {
-        var coffeeShop = new CoffeeShop(new InMemoryOrders(), new InMemoryPayments());
-        customer = coffeeShop;
-        barista = coffeeShop;
+        var orders = new InMemoryOrders();
+        var payments = new InMemoryPayments();
+        customer = new CoffeeShop(orders, payments);
+        barista = new CoffeeMachine(orders);
     }
 
     @Test

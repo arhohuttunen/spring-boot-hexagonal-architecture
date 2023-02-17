@@ -1,20 +1,19 @@
 package com.arhohuttunen.restbucks.application;
 
+import com.arhohuttunen.architecture.UseCase;
 import com.arhohuttunen.restbucks.application.in.OrderingCoffee;
-import com.arhohuttunen.restbucks.application.in.PreparingCoffee;
 import com.arhohuttunen.restbucks.application.order.Order;
 import com.arhohuttunen.restbucks.application.out.Orders;
 import com.arhohuttunen.restbucks.application.out.Payments;
 import com.arhohuttunen.restbucks.application.payment.CreditCard;
 import com.arhohuttunen.restbucks.application.payment.Payment;
 import com.arhohuttunen.restbucks.application.payment.Receipt;
-import com.arhohuttunen.architecture.UseCase;
 
 import java.time.LocalDate;
 import java.util.UUID;
 
 @UseCase
-public class CoffeeShop implements OrderingCoffee, PreparingCoffee {
+public class CoffeeShop implements OrderingCoffee {
     private final Orders orders;
     private final Payments payments;
 
@@ -66,20 +65,6 @@ public class CoffeeShop implements OrderingCoffee, PreparingCoffee {
         var payment = payments.findPaymentByOrderId(orderId);
 
         return new Receipt(order.getCost(), payment.getPaid());
-    }
-
-    @Override
-    public void startPreparingOrder(UUID orderId) {
-        var order = orders.findOrderById(orderId);
-
-        orders.save(order.markBeingPrepared());
-    }
-
-    @Override
-    public void finishPreparingOrder(UUID orderId) {
-        var order = orders.findOrderById(orderId);
-
-        orders.save(order.markPrepared());
     }
 
     @Override

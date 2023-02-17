@@ -1,5 +1,6 @@
 package com.arhohuttunen.restbucks;
 
+import com.arhohuttunen.restbucks.application.CoffeeMachine;
 import com.arhohuttunen.restbucks.application.CoffeeShop;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ class RestBucksApplicationTests {
     private MockMvc mockMvc;
 
     @Autowired
-    private CoffeeShop coffeeShop;
+    private CoffeeMachine coffeeMachine;
 
     private final String orderJson = """
                         {
@@ -85,8 +86,8 @@ class RestBucksApplicationTests {
     }
 
     private void prepareOrder(UUID orderId) {
-        coffeeShop.startPreparingOrder(orderId);
-        coffeeShop.finishPreparingOrder(orderId);
+        coffeeMachine.startPreparingOrder(orderId);
+        coffeeMachine.finishPreparingOrder(orderId);
     }
 
     private void readReceipt(UUID orderId) throws Exception {
