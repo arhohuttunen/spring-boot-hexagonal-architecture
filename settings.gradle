@@ -1,1 +1,3 @@
 rootProject.name = 'spring-boot-hexagonal-architecture'
+include 'coffeeshop-application'
+include 'coffeeshop-infrastructure'
