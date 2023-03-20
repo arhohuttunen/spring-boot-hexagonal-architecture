@@ -26,18 +26,6 @@ class CoffeeShopApplicationTests {
     @Autowired
     private CoffeeMachine coffeeMachine;
 
-    private final String orderJson = """
-                        {
-                            "location": "IN_STORE",
-                            "items": [{
-                                "drink": "LATTE",
-                                "quantity": 1,
-                                "milk": "WHOLE",
-                                "size": "LARGE"
-                            }]
-                        }
-                        """;
-
     @Test
     void processNewOrder() throws Exception {
         var orderId = createOrder();
@@ -56,7 +44,17 @@ class CoffeeShopApplicationTests {
     private UUID createOrder() throws Exception {
         var location = mockMvc.perform(post("/order")
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
-                        .content(orderJson))
+                        .content("""
+                        {
+                            "location": "IN_STORE",
+                            "items": [{
+                                "drink": "LATTE",
+                                "quantity": 1,
+                                "milk": "WHOLE",
+                                "size": "LARGE"
+                            }]
+                        }
+                        """))
                 .andExpect(status().isCreated())
                 .andReturn()
                 .getResponse()
