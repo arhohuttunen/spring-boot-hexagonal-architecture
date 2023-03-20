@@ -7,6 +7,11 @@ import com.arhohuttunen.coffeeshop.shared.Size;
 
 public record OrderItemResponse(Drink drink, Integer quantity, Milk milk, Size size) {
     public static OrderItemResponse fromDomain(OrderItem orderItem) {
-        return new OrderItemResponse(orderItem.drink(), orderItem.quantity(), orderItem.milk(), orderItem.size());
+        return new OrderItemResponse(
+                orderItem.drink(),
+                orderItem.quantity(),
+                orderItem.milk(),
+                orderItem.size()
+        );
     }
 }

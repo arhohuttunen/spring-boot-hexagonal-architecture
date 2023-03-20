@@ -21,12 +21,15 @@ import java.util.UUID;
 public class OrderEntity {
     @Id
     private UUID id;
+
     @Enumerated
     @NotNull
     private Location location;
+
     @Enumerated
     @NotNull
     private Status status;
+
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "order_id")
     private List<OrderItemEntity> items;

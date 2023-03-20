@@ -9,6 +9,7 @@ public record PaymentResponse(String cardHolderName, String cardNumber, Integer 
                 creditCard.cardHolderName(),
                 creditCard.cardNumber(),
                 creditCard.expiryMonth().getValue(),
-                creditCard.expiryYear().getValue());
+                creditCard.expiryYear().getValue()
+        );
     }
 }

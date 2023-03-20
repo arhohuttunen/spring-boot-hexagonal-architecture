@@ -17,16 +17,22 @@ import java.util.UUID;
 public class PaymentEntity {
     @Id
     private UUID id;
+
     @NotNull
     private UUID orderId;
+
     @NotNull
     private String cardHolderName;
+
     @NotNull
     private String cardNumber;
+
     @NotNull
     private Month expiryMonth;
+
     @NotNull
     private Year expiryYear;
+
     @NotNull
     private LocalDate paid;
 }

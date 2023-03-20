@@ -27,12 +27,16 @@ public class OrdersJpaAdapterTest {
 
     @Test
     void creatingOrderReturnsPersistedOrder() {
-        var order = new Order(Location.TAKE_AWAY, List.of(new OrderItem(Drink.LATTE, 1, Milk.WHOLE, Size.SMALL)));
+        var order = new Order(Location.TAKE_AWAY, List.of(
+                new OrderItem(Drink.LATTE, 1, Milk.WHOLE, Size.SMALL)
+        ));
 
         var persistedOrder = adapter.save(order);
 
         assertThat(persistedOrder.getLocation()).isEqualTo(Location.TAKE_AWAY);
-        assertThat(persistedOrder.getItems()).containsExactly(new OrderItem(Drink.LATTE, 1, Milk.WHOLE, Size.SMALL));
+        assertThat(persistedOrder.getItems()).containsExactly(
+                new OrderItem(Drink.LATTE, 1, Milk.WHOLE, Size.SMALL)
+        );
     }
 
     @Test

@@ -15,7 +15,9 @@ public class PaymentsJpaAdapter implements Payments {
 
     @Override
     public Payment findPaymentByOrderId(UUID orderId) {
-        return paymentJpaRepository.findByOrderId(orderId).map(this::toDomain).orElseThrow();
+        return paymentJpaRepository.findByOrderId(orderId)
+                .map(this::toDomain)
+                .orElseThrow();
     }
 
     @Override
@@ -36,6 +38,15 @@ public class PaymentsJpaAdapter implements Payments {
     }
 
     private Payment toDomain(PaymentEntity entity) {
-        return new Payment(entity.getOrderId(), new CreditCard(entity.getCardHolderName(), entity.getCardNumber(), entity.getExpiryMonth(), entity.getExpiryYear()), entity.getPaid());
+        return new Payment(
+                entity.getOrderId(),
+                new CreditCard(
+                        entity.getCardHolderName(),
+                        entity.getCardNumber(),
+                        entity.getExpiryMonth(),
+                        entity.getExpiryYear()
+                ),
+                entity.getPaid()
+        );
     }
 }

@@ -20,14 +20,18 @@ public class OrderItemEntity {
     @Id
     @GeneratedValue
     private UUID id;
+
     @Enumerated
     @NotNull
     private Drink drink;
+
     @NotNull
     private Integer quantity;
+
     @Enumerated
     @NotNull
     private Size size;
+
     @Enumerated
     @NotNull
     private Milk milk;

@@ -23,7 +23,14 @@ public class PaymentController {
 
     @PutMapping("/payment/{id}")
     ResponseEntity<PaymentResponse> payOrder(@PathVariable UUID id, @Valid @RequestBody PaymentRequest request) {
-        var payment = orderingCoffee.payOrder(id, new CreditCard(request.cardHolderName(), request.cardNumber(), Month.of(request.expiryMonth()), Year.of(request.expiryYear())));
+        var payment = orderingCoffee.payOrder(id,
+                new CreditCard(
+                        request.cardHolderName(),
+                        request.cardNumber(),
+                        Month.of(request.expiryMonth()),
+                        Year.of(request.expiryYear())
+                )
+        );
         return ResponseEntity.ok(PaymentResponse.fromDomain(payment));
     }
 }

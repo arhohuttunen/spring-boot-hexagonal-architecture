@@ -15,7 +15,9 @@ public class OrdersJpaAdapter implements Orders {
 
     @Override
     public Order findOrderById(UUID orderId) {
-        return orderJpaRepository.findById(orderId).map(this::toDomain).orElseThrow();
+        return orderJpaRepository.findById(orderId)
+                .map(this::toDomain)
+                .orElseThrow();
     }
 
     @Override

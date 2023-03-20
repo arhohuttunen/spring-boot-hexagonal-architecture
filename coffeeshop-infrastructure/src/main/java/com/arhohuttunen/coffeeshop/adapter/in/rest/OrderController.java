@@ -23,7 +23,9 @@ public class OrderController {
     @PostMapping("/order")
     ResponseEntity<OrderResponse> createOrder(@RequestBody OrderRequest request, UriComponentsBuilder uriComponentsBuilder) {
         var order = orderingCoffee.createOrder(request.toDomain());
-        var location = uriComponentsBuilder.path("/order/{id}").buildAndExpand(order.getId()).toUri();
+        var location = uriComponentsBuilder.path("/order/{id}")
+                .buildAndExpand(order.getId())
+                .toUri();
         return ResponseEntity.created(location).body(OrderResponse.fromDomain(order));
     }
 
