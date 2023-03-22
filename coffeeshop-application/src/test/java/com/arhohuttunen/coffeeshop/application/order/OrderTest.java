@@ -28,7 +28,7 @@ public class OrderTest {
 
     @ParameterizedTest(name = "{0} drinks of size {1} cost {2}")
     @MethodSource("drinkCosts")
-    void creatingOrderReturnsCost(int quantity, Size size, BigDecimal expectedCost) {
+    void orderCostBasedOnQuantityAndSize(int quantity, Size size, BigDecimal expectedCost) {
         var order = new Order(Location.TAKE_AWAY, List.of(
                 new LineItem(Drink.LATTE, Milk.WHOLE, size, quantity)
         ));
@@ -37,7 +37,7 @@ public class OrderTest {
     }
 
     @Test
-    void creatingOrderWithMultipleItemsReturnsCost() {
+    void orderCostIsSumOfLineItemCosts() {
         var order = new Order(Location.TAKE_AWAY, List.of(
                 new LineItem(Drink.LATTE, Milk.SKIMMED, Size.LARGE, 1),
                 new LineItem(Drink.ESPRESSO, Milk.SOY, Size.SMALL, 1)
