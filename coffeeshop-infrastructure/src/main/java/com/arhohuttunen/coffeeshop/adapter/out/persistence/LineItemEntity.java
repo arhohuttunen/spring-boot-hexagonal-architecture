@@ -1,5 +1,6 @@
 package com.arhohuttunen.coffeeshop.adapter.out.persistence;
 
+import com.arhohuttunen.coffeeshop.application.order.LineItem;
 import com.arhohuttunen.coffeeshop.shared.Drink;
 import com.arhohuttunen.coffeeshop.shared.Milk;
 import com.arhohuttunen.coffeeshop.shared.Size;
@@ -35,4 +36,22 @@ public class LineItemEntity {
 
     @NotNull
     private Integer quantity;
+
+    public LineItem toDomain() {
+        return new LineItem(
+                drink,
+                milk,
+                size,
+                quantity
+        );
+    }
+
+    public static LineItemEntity fromDomain(LineItem lineItem) {
+        var entity = new LineItemEntity();
+        entity.setDrink(lineItem.drink());
+        entity.setQuantity(lineItem.quantity());
+        entity.setMilk(lineItem.milk());
+        entity.setSize(lineItem.size());
+        return entity;
+    }
 }

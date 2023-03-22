@@ -1,5 +1,6 @@
 package com.arhohuttunen.coffeeshop.adapter.out.persistence;
 
+import com.arhohuttunen.coffeeshop.application.order.Order;
 import com.arhohuttunen.coffeeshop.shared.Location;
 import com.arhohuttunen.coffeeshop.shared.Status;
 import jakarta.persistence.CascadeType;
@@ -33,4 +34,22 @@ public class OrderEntity {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "order_id")
     private List<LineItemEntity> items;
+
+    public Order toDomain() {
+        return new Order(
+                id,
+                location,
+                items.stream().map(LineItemEntity::toDomain).toList(),
+                status
+        );
+    }
+
+    public static OrderEntity fromDomain(Order order) {
+        var entity = new OrderEntity();
+        entity.setId(order.getId());
+        entity.setLocation(order.getLocation());
+        entity.setStatus(order.getStatus());
+        entity.setItems(order.getItems().stream().map(LineItemEntity::fromDomain).toList());
+        return entity;
+    }
 }
