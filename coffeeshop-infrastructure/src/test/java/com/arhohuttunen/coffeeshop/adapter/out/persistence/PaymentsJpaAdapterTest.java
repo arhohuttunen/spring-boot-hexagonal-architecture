@@ -1,5 +1,6 @@
 package com.arhohuttunen.coffeeshop.adapter.out.persistence;
 
+import com.arhohuttunen.coffeeshop.application.out.Payments;
 import com.arhohuttunen.coffeeshop.application.payment.CreditCard;
 import com.arhohuttunen.coffeeshop.application.payment.Payment;
 import org.junit.jupiter.api.Test;
@@ -19,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @PersistenceTest
 public class PaymentsJpaAdapterTest {
     @Autowired
-    private PaymentsJpaAdapter adapter;
+    private Payments payments;
 
     @Test
     void creatingPaymentReturnsPersistedPayment() {
@@ -27,7 +28,7 @@ public class PaymentsJpaAdapterTest {
         var creditCard = aCreditCard();
         var payment = new Payment(UUID.randomUUID(), creditCard, now);
 
-        var persistedPayment = adapter.save(payment);
+        var persistedPayment = payments.save(payment);
 
         assertThat(persistedPayment.getCreditCard()).isEqualTo(creditCard);
         assertThat(persistedPayment.getPaid()).isEqualTo(now);
@@ -36,7 +37,7 @@ public class PaymentsJpaAdapterTest {
     @Test
     @Sql("classpath:data/payment.sql")
     void findingPreviouslyPersistedPaymentReturnsDetails() {
-        var payment = adapter.findPaymentByOrderId(UUID.fromString("a41c9394-3aa6-4484-b0b4-87de55fa2cf4"));
+        var payment = payments.findPaymentByOrderId(UUID.fromString("a41c9394-3aa6-4484-b0b4-87de55fa2cf4"));
 
         var expectedCreditCard = new CreditCard("Michael Faraday", "11223344", Month.JANUARY, Year.of(2023));
 
@@ -45,6 +46,6 @@ public class PaymentsJpaAdapterTest {
 
     @Test
     void findingNonExistingPaymentThrowsException() {
-        assertThatThrownBy(() -> adapter.findPaymentByOrderId(UUID.randomUUID())).isInstanceOf(NoSuchElementException.class);
+        assertThatThrownBy(() -> payments.findPaymentByOrderId(UUID.randomUUID())).isInstanceOf(NoSuchElementException.class);
     }
 }
