@@ -16,7 +16,7 @@ import java.util.UUID;
 @Entity
 @Setter
 @Getter
-public class OrderItemEntity {
+public class LineItemEntity {
     @Id
     @GeneratedValue
     private UUID id;

@@ -11,15 +11,15 @@ import java.util.UUID;
 public class Order {
     private UUID id = UUID.randomUUID();
     private final Location location;
-    private final List<OrderItem> items;
+    private final List<LineItem> items;
     private Status status = Status.PAYMENT_EXPECTED;
 
-    public Order(Location location, List<OrderItem> items) {
+    public Order(Location location, List<LineItem> items) {
         this.location = location;
         this.items = items;
     }
 
-    public Order(UUID id, Location location, List<OrderItem> items, Status status) {
+    public Order(UUID id, Location location, List<LineItem> items, Status status) {
         this.id = id;
         this.location = location;
         this.items = items;
@@ -34,7 +34,7 @@ public class Order {
         return this.location;
     }
 
-    public List<OrderItem> getItems() {
+    public List<LineItem> getItems() {
         return Collections.unmodifiableList(this.items);
     }
 
@@ -55,7 +55,7 @@ public class Order {
     }
 
     public BigDecimal getCost() {
-        return items.stream().map(OrderItem::getCost).reduce(BigDecimal::add).orElse(BigDecimal.ZERO);
+        return items.stream().map(LineItem::getCost).reduce(BigDecimal::add).orElse(BigDecimal.ZERO);
     }
 
     public Order update(Order order) {

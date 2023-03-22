@@ -5,8 +5,8 @@ import com.arhohuttunen.coffeeshop.shared.Location;
 
 import java.util.List;
 
-public record OrderRequest(Location location, List<OrderItemRequest> items) {
+public record OrderRequest(Location location, List<LineItemRequest> items) {
     public Order toDomain() {
-        return new Order(location, items.stream().map(OrderItemRequest::toDomain).toList());
+        return new Order(location, items.stream().map(LineItemRequest::toDomain).toList());
     }
 }

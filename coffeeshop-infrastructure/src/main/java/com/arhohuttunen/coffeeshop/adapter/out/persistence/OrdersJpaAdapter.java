@@ -1,7 +1,7 @@
 package com.arhohuttunen.coffeeshop.adapter.out.persistence;
 
 import com.arhohuttunen.coffeeshop.application.order.Order;
-import com.arhohuttunen.coffeeshop.application.order.OrderItem;
+import com.arhohuttunen.coffeeshop.application.order.LineItem;
 import com.arhohuttunen.coffeeshop.application.out.Orders;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -39,12 +39,12 @@ public class OrdersJpaAdapter implements Orders {
         return entity;
     }
 
-    private OrderItemEntity toEntity(OrderItem orderItem) {
-        var entity = new OrderItemEntity();
-        entity.setDrink(orderItem.drink());
-        entity.setQuantity(orderItem.quantity());
-        entity.setMilk(orderItem.milk());
-        entity.setSize(orderItem.size());
+    private LineItemEntity toEntity(LineItem lineItem) {
+        var entity = new LineItemEntity();
+        entity.setDrink(lineItem.drink());
+        entity.setQuantity(lineItem.quantity());
+        entity.setMilk(lineItem.milk());
+        entity.setSize(lineItem.size());
         return entity;
     }
 
@@ -57,8 +57,8 @@ public class OrdersJpaAdapter implements Orders {
         );
     }
 
-    private OrderItem toDomain(OrderItemEntity entity) {
-        return new OrderItem(
+    private LineItem toDomain(LineItemEntity entity) {
+        return new LineItem(
                 entity.getDrink(),
                 entity.getQuantity(),
                 entity.getMilk(),

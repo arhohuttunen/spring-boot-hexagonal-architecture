@@ -7,11 +7,11 @@ import com.arhohuttunen.coffeeshop.shared.Status;
 import java.math.BigDecimal;
 import java.util.List;
 
-public record OrderResponse(Location location, List<OrderItemResponse> items, BigDecimal cost, Status status) {
+public record OrderResponse(Location location, List<LineItemResponse> items, BigDecimal cost, Status status) {
     public static OrderResponse fromDomain(Order order) {
         return new OrderResponse(
                 order.getLocation(),
-                order.getItems().stream().map(OrderItemResponse::fromDomain).toList(),
+                order.getItems().stream().map(LineItemResponse::fromDomain).toList(),
                 order.getCost(),
                 order.getStatus()
         );

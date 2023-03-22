@@ -1,7 +1,7 @@
 package com.arhohuttunen.coffeeshop.application;
 
 import com.arhohuttunen.coffeeshop.application.order.Order;
-import com.arhohuttunen.coffeeshop.application.order.OrderItem;
+import com.arhohuttunen.coffeeshop.application.order.LineItem;
 import com.arhohuttunen.coffeeshop.application.out.Orders;
 import com.arhohuttunen.coffeeshop.application.out.Payments;
 import com.arhohuttunen.coffeeshop.application.out.stubs.InMemoryOrders;
@@ -45,13 +45,13 @@ class CoffeeShopTest {
 
     @Test
     void readingOrderReturnsDetails() {
-        var existingOrder = new Order(Location.TAKE_AWAY, List.of(new OrderItem(Drink.LATTE, 1, Milk.WHOLE, Size.SMALL)));
+        var existingOrder = new Order(Location.TAKE_AWAY, List.of(new LineItem(Drink.LATTE, 1, Milk.WHOLE, Size.SMALL)));
         orders.save(existingOrder);
 
         var order = coffeeShop.readOrder(existingOrder.getId());
 
         assertThat(order.getLocation()).isEqualTo(Location.TAKE_AWAY);
-        assertThat(order.getItems()).containsExactly(new OrderItem(Drink.LATTE, 1, Milk.WHOLE, Size.SMALL));
+        assertThat(order.getItems()).containsExactly(new LineItem(Drink.LATTE, 1, Milk.WHOLE, Size.SMALL));
     }
 
     @Test
@@ -59,11 +59,11 @@ class CoffeeShopTest {
         var existingOrder = orders.save(anOrder());
 
         var order = coffeeShop.updateOrder(existingOrder.getId(),
-                new Order(Location.IN_STORE, List.of(new OrderItem(Drink.ESPRESSO, 2, Milk.WHOLE, Size.SMALL)))
+                new Order(Location.IN_STORE, List.of(new LineItem(Drink.ESPRESSO, 2, Milk.WHOLE, Size.SMALL)))
         );
 
         assertThat(order.getLocation()).isEqualTo(Location.IN_STORE);
-        assertThat(order.getItems()).containsExactly(new OrderItem(Drink.ESPRESSO, 2, Milk.WHOLE, Size.SMALL));
+        assertThat(order.getItems()).containsExactly(new LineItem(Drink.ESPRESSO, 2, Milk.WHOLE, Size.SMALL));
     }
 
     @Test

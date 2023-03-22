@@ -32,5 +32,5 @@ public class OrderEntity {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "order_id")
-    private List<OrderItemEntity> items;
+    private List<LineItemEntity> items;
 }
