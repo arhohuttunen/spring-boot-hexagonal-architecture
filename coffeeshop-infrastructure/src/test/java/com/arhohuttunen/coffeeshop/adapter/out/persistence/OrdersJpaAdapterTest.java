@@ -28,14 +28,14 @@ public class OrdersJpaAdapterTest {
     @Test
     void creatingOrderReturnsPersistedOrder() {
         var order = new Order(Location.TAKE_AWAY, List.of(
-                new LineItem(Drink.LATTE, 1, Milk.WHOLE, Size.SMALL)
+                new LineItem(Drink.LATTE, Milk.WHOLE, Size.SMALL, 1)
         ));
 
         var persistedOrder = adapter.save(order);
 
         assertThat(persistedOrder.getLocation()).isEqualTo(Location.TAKE_AWAY);
         assertThat(persistedOrder.getItems()).containsExactly(
-                new LineItem(Drink.LATTE, 1, Milk.WHOLE, Size.SMALL)
+                new LineItem(Drink.LATTE, Milk.WHOLE, Size.SMALL, 1)
         );
     }
 
@@ -45,7 +45,7 @@ public class OrdersJpaAdapterTest {
         var order = adapter.findOrderById(UUID.fromString("757d9c0f-400f-4137-9aea-83e64ba3efb2"));
 
         assertThat(order.getLocation()).isEqualTo(Location.IN_STORE);
-        assertThat(order.getItems()).containsExactly(new LineItem(Drink.ESPRESSO, 1, Milk.SKIMMED, Size.LARGE));
+        assertThat(order.getItems()).containsExactly(new LineItem(Drink.ESPRESSO, Milk.SKIMMED, Size.LARGE, 1));
     }
 
     @Test

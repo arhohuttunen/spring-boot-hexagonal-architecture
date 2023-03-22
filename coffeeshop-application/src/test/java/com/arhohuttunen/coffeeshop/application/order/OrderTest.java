@@ -30,7 +30,7 @@ public class OrderTest {
     @MethodSource("drinkCosts")
     void creatingOrderReturnsCost(int quantity, Size size, BigDecimal expectedCost) {
         var order = new Order(Location.TAKE_AWAY, List.of(
-                new LineItem(Drink.LATTE, quantity, Milk.WHOLE, size)
+                new LineItem(Drink.LATTE, Milk.WHOLE, size, quantity)
         ));
 
         assertThat(order.getCost()).isEqualTo(expectedCost);
@@ -39,8 +39,8 @@ public class OrderTest {
     @Test
     void creatingOrderWithMultipleItemsReturnsCost() {
         var order = new Order(Location.TAKE_AWAY, List.of(
-                new LineItem(Drink.LATTE, 1, Milk.SKIMMED, Size.LARGE),
-                new LineItem(Drink.ESPRESSO, 1, Milk.SOY, Size.SMALL)
+                new LineItem(Drink.LATTE, Milk.SKIMMED, Size.LARGE, 1),
+                new LineItem(Drink.ESPRESSO, Milk.SOY, Size.SMALL, 1)
         ));
 
         assertThat(order.getCost()).isEqualTo(BigDecimal.valueOf(9.0));

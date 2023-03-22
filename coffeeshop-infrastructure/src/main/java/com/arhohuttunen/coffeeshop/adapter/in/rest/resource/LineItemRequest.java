@@ -5,8 +5,8 @@ import com.arhohuttunen.coffeeshop.shared.Drink;
 import com.arhohuttunen.coffeeshop.shared.Milk;
 import com.arhohuttunen.coffeeshop.shared.Size;
 
-public record LineItemRequest(Drink drink, Integer quantity, Milk milk, Size size) {
+public record LineItemRequest(Drink drink, Milk milk, Size size, Integer quantity) {
     public LineItem toDomain() {
-        return new LineItem(drink, quantity, milk, size);
+        return new LineItem(drink, milk, size, quantity);
     }
 }

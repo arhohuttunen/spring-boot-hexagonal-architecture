@@ -45,13 +45,13 @@ class CoffeeShopTest {
 
     @Test
     void readingOrderReturnsDetails() {
-        var existingOrder = new Order(Location.TAKE_AWAY, List.of(new LineItem(Drink.LATTE, 1, Milk.WHOLE, Size.SMALL)));
+        var existingOrder = new Order(Location.TAKE_AWAY, List.of(new LineItem(Drink.LATTE, Milk.WHOLE, Size.SMALL, 1)));
         orders.save(existingOrder);
 
         var order = coffeeShop.readOrder(existingOrder.getId());
 
         assertThat(order.getLocation()).isEqualTo(Location.TAKE_AWAY);
-        assertThat(order.getItems()).containsExactly(new LineItem(Drink.LATTE, 1, Milk.WHOLE, Size.SMALL));
+        assertThat(order.getItems()).containsExactly(new LineItem(Drink.LATTE, Milk.WHOLE, Size.SMALL, 1));
     }
 
     @Test
@@ -59,11 +59,11 @@ class CoffeeShopTest {
         var existingOrder = orders.save(anOrder());
 
         var order = coffeeShop.updateOrder(existingOrder.getId(),
-                new Order(Location.IN_STORE, List.of(new LineItem(Drink.ESPRESSO, 2, Milk.WHOLE, Size.SMALL)))
+                new Order(Location.IN_STORE, List.of(new LineItem(Drink.ESPRESSO, Milk.WHOLE, Size.SMALL, 2)))
         );
 
         assertThat(order.getLocation()).isEqualTo(Location.IN_STORE);
-        assertThat(order.getItems()).containsExactly(new LineItem(Drink.ESPRESSO, 2, Milk.WHOLE, Size.SMALL));
+        assertThat(order.getItems()).containsExactly(new LineItem(Drink.ESPRESSO, Milk.WHOLE, Size.SMALL, 2));
     }
 
     @Test

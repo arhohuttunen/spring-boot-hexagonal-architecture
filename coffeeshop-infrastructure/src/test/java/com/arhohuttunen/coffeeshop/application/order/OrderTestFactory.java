@@ -11,10 +11,10 @@ import java.util.UUID;
 
 public class OrderTestFactory {
     public static Order anOrder() {
-        return new Order(Location.TAKE_AWAY, List.of(new LineItem(Drink.LATTE, 1, Milk.WHOLE, Size.LARGE)));
+        return new Order(Location.TAKE_AWAY, List.of(new LineItem(Drink.LATTE, Milk.WHOLE, Size.LARGE, 1)));
     }
 
     public static Order aReadyOrder() {
-        return new Order(UUID.randomUUID(), Location.TAKE_AWAY, List.of(new LineItem(Drink.LATTE, 1, Milk.WHOLE, Size.LARGE)), Status.READY);
+        return new Order(UUID.randomUUID(), Location.TAKE_AWAY, List.of(new LineItem(Drink.LATTE, Milk.WHOLE, Size.LARGE, 1)), Status.READY);
     }
 }

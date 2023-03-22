@@ -25,9 +25,6 @@ public class LineItemEntity {
     @NotNull
     private Drink drink;
 
-    @NotNull
-    private Integer quantity;
-
     @Enumerated
     @NotNull
     private Size size;
@@ -35,4 +32,7 @@ public class LineItemEntity {
     @Enumerated
     @NotNull
     private Milk milk;
+
+    @NotNull
+    private Integer quantity;
 }

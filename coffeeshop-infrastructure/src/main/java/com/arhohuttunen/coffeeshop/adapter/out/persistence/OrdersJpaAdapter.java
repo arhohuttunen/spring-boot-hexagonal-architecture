@@ -60,9 +60,7 @@ public class OrdersJpaAdapter implements Orders {
     private LineItem toDomain(LineItemEntity entity) {
         return new LineItem(
                 entity.getDrink(),
-                entity.getQuantity(),
-                entity.getMilk(),
-                entity.getSize()
+                entity.getMilk(), entity.getSize(), entity.getQuantity()
         );
     }
 }

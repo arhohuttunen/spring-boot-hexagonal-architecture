@@ -5,13 +5,11 @@ import com.arhohuttunen.coffeeshop.shared.Drink;
 import com.arhohuttunen.coffeeshop.shared.Milk;
 import com.arhohuttunen.coffeeshop.shared.Size;
 
-public record LineItemResponse(Drink drink, Integer quantity, Milk milk, Size size) {
+public record LineItemResponse(Drink drink, Milk milk, Size size, Integer quantity) {
     public static LineItemResponse fromDomain(LineItem lineItem) {
         return new LineItemResponse(
                 lineItem.drink(),
-                lineItem.quantity(),
-                lineItem.milk(),
-                lineItem.size()
+                lineItem.milk(), lineItem.size(), lineItem.quantity()
         );
     }
 }
