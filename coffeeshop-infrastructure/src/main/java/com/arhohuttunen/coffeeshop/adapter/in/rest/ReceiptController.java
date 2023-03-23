@@ -25,7 +25,7 @@ public class ReceiptController {
 
     @DeleteMapping("/receipt/{id}")
     ResponseEntity<OrderResponse> completeOrder(@PathVariable UUID id) {
-        var order = orderingCoffee.completeOrder(id);
+        var order = orderingCoffee.takeOrder(id);
         return ResponseEntity.ok(OrderResponse.fromDomain(order));
     }
 }

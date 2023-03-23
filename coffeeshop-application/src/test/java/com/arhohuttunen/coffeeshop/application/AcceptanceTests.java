@@ -45,7 +45,7 @@ class AcceptanceTests {
     void customerCanOrderCoffee() {
         var orderToMake = new Order(Location.IN_STORE, List.of(new LineItem(Drink.CAPPUCCINO, Milk.SKIMMED, Size.SMALL, 1)));
 
-        var order = customer.createOrder(orderToMake);
+        var order = customer.placeOrder(orderToMake);
 
         assertThat(order.getLocation()).isEqualTo(Location.IN_STORE);
         assertThat(order.getItems()).containsExactly(new LineItem(Drink.CAPPUCCINO, Milk.SKIMMED, Size.SMALL, 1));
@@ -57,7 +57,7 @@ class AcceptanceTests {
         var orderWithOneItem = new Order(Location.TAKE_AWAY, List.of(new LineItem(Drink.LATTE, Milk.WHOLE, Size.LARGE, 1)));
         var orderWithTwoItems = new Order(Location.TAKE_AWAY, List.of(new LineItem(Drink.LATTE, Milk.WHOLE, Size.LARGE, 2)));
 
-        var order = customer.createOrder(orderWithOneItem);
+        var order = customer.placeOrder(orderWithOneItem);
         var updatedOrder = customer.updateOrder(order.getId(), orderWithTwoItems);
 
         assertThat(updatedOrder.getItems()).containsExactly(new LineItem(Drink.LATTE, Milk.WHOLE, Size.LARGE, 2));
@@ -124,7 +124,7 @@ class AcceptanceTests {
     void customerCanTakeTheOrderWhenItIsReady() {
         var existingOrder = orders.save(aReadyOrder());
 
-        customer.completeOrder(existingOrder.getId());
+        customer.takeOrder(existingOrder.getId());
 
         assertThat(existingOrder.getStatus()).isEqualTo(Status.TAKEN);
     }

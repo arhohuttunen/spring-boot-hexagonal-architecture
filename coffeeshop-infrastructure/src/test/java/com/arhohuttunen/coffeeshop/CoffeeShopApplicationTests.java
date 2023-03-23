@@ -28,20 +28,20 @@ class CoffeeShopApplicationTests {
 
     @Test
     void processNewOrder() throws Exception {
-        var orderId = createOrder();
+        var orderId = placeOrder();
         payOrder(orderId);
         prepareOrder(orderId);
         readReceipt(orderId);
-        getReceipt(orderId);
+        takeOrder(orderId);
     }
 
     @Test
     void cancelOrderBeforePayment() throws Exception {
-        var orderId = createOrder();
+        var orderId = placeOrder();
         cancelOrder(orderId);
     }
 
-    private UUID createOrder() throws Exception {
+    private UUID placeOrder() throws Exception {
         var location = mockMvc.perform(post("/order")
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content("""
@@ -92,7 +92,7 @@ class CoffeeShopApplicationTests {
                 .andExpect(status().isOk());
     }
 
-    private void getReceipt(UUID orderId) throws Exception {
+    private void takeOrder(UUID orderId) throws Exception {
         mockMvc.perform(delete("/receipt/{id}", orderId))
                 .andExpect(status().isOk());
     }

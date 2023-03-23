@@ -23,7 +23,7 @@ public class CoffeeShop implements OrderingCoffee {
     }
 
     @Override
-    public Order createOrder(Order order) {
+    public Order placeOrder(Order order) {
         return orders.save(order);
     }
 
@@ -68,7 +68,7 @@ public class CoffeeShop implements OrderingCoffee {
     }
 
     @Override
-    public Order completeOrder(UUID orderId) {
+    public Order takeOrder(UUID orderId) {
         var order = orders.findOrderById(orderId);
 
         return orders.save(order.markTaken());

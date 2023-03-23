@@ -22,7 +22,7 @@ public class OrderController {
 
     @PostMapping("/order")
     ResponseEntity<OrderResponse> createOrder(@RequestBody OrderRequest request, UriComponentsBuilder uriComponentsBuilder) {
-        var order = orderingCoffee.createOrder(request.toDomain());
+        var order = orderingCoffee.placeOrder(request.toDomain());
         var location = uriComponentsBuilder.path("/order/{id}")
                 .buildAndExpand(order.getId())
                 .toUri();
