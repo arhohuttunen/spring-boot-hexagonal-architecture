@@ -42,14 +42,6 @@ public class Order {
         return this.status;
     }
 
-    public boolean isUnpaid() {
-        return status == Status.PAYMENT_EXPECTED;
-    }
-
-    public boolean isComplete() {
-        return status == Status.TAKEN;
-    }
-
     public boolean canBeCancelled() {
         return status == Status.PAYMENT_EXPECTED;
     }
