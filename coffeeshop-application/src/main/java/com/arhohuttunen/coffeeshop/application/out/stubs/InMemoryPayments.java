@@ -17,7 +17,7 @@ public class InMemoryPayments implements Payments {
 
     @Override
     public Payment save(Payment payment) {
-        entities.put(payment.getOrderId(), payment);
+        entities.put(payment.orderId(), payment);
         return payment;
     }
 }

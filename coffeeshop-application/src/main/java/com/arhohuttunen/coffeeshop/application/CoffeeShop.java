@@ -64,7 +64,7 @@ public class CoffeeShop implements OrderingCoffee {
         var order = orders.findOrderById(orderId);
         var payment = payments.findPaymentByOrderId(orderId);
 
-        return new Receipt(order.getCost(), payment.getPaid());
+        return new Receipt(order.getCost(), payment.paid());
     }
 
     @Override

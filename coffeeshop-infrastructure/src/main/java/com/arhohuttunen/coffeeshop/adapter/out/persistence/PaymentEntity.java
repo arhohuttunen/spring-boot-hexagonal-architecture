@@ -3,6 +3,7 @@ package com.arhohuttunen.coffeeshop.adapter.out.persistence;
 import com.arhohuttunen.coffeeshop.application.payment.CreditCard;
 import com.arhohuttunen.coffeeshop.application.payment.Payment;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -18,6 +19,7 @@ import java.util.UUID;
 @Setter
 public class PaymentEntity {
     @Id
+    @GeneratedValue
     private UUID id;
 
     @NotNull
@@ -40,7 +42,7 @@ public class PaymentEntity {
 
     public Payment toDomain() {
         return new Payment(
-                id,
+                orderId,
                 new CreditCard(
                         cardHolderName,
                         cardNumber,
@@ -53,13 +55,12 @@ public class PaymentEntity {
 
     public static PaymentEntity fromDomain(Payment payment) {
         var entity = new PaymentEntity();
-        entity.setId(payment.getId());
-        entity.setOrderId(payment.getOrderId());
-        entity.setCardHolderName(payment.getCreditCard().cardHolderName());
-        entity.setCardNumber(payment.getCreditCard().cardNumber());
-        entity.setExpiryMonth(payment.getCreditCard().expiryMonth());
-        entity.setExpiryYear(payment.getCreditCard().expiryYear());
-        entity.setPaid(payment.getPaid());
+        entity.setOrderId(payment.orderId());
+        entity.setCardHolderName(payment.creditCard().cardHolderName());
+        entity.setCardNumber(payment.creditCard().cardNumber());
+        entity.setExpiryMonth(payment.creditCard().expiryMonth());
+        entity.setExpiryYear(payment.creditCard().expiryYear());
+        entity.setPaid(payment.paid());
         return entity;
     }
 }

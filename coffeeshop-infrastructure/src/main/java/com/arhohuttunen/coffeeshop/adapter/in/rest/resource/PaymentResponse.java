@@ -4,7 +4,7 @@ import com.arhohuttunen.coffeeshop.application.payment.Payment;
 
 public record PaymentResponse(String cardHolderName, String cardNumber, Integer expiryMonth, Integer expiryYear) {
     public static PaymentResponse fromDomain(Payment payment) {
-        var creditCard = payment.getCreditCard();
+        var creditCard = payment.creditCard();
         return new PaymentResponse(
                 creditCard.cardHolderName(),
                 creditCard.cardNumber(),

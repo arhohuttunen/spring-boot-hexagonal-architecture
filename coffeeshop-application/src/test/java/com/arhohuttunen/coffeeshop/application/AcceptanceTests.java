@@ -79,8 +79,8 @@ class AcceptanceTests {
 
         var payment = customer.payOrder(existingOrder.getId(), creditCard);
 
-        assertThat(payment.getOrderId()).isEqualTo(existingOrder.getId());
-        assertThat(payment.getCreditCard()).isEqualTo(creditCard);
+        assertThat(payment.orderId()).isEqualTo(existingOrder.getId());
+        assertThat(payment.creditCard()).isEqualTo(creditCard);
         assertThat(orders.findOrderById(existingOrder.getId()).getStatus()).isEqualTo(Status.PAID);
     }
 
@@ -99,7 +99,7 @@ class AcceptanceTests {
         var receipt = customer.readReceipt(existingOrder.getId());
 
         assertThat(receipt.amount()).isEqualTo(existingOrder.getCost());
-        assertThat(receipt.paid()).isEqualTo(existingPayment.getPaid());
+        assertThat(receipt.paid()).isEqualTo(existingPayment.paid());
     }
 
     @Test

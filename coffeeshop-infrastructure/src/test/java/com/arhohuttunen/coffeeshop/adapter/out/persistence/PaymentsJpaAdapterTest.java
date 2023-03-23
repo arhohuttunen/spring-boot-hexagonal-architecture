@@ -30,8 +30,8 @@ public class PaymentsJpaAdapterTest {
 
         var persistedPayment = payments.save(payment);
 
-        assertThat(persistedPayment.getCreditCard()).isEqualTo(creditCard);
-        assertThat(persistedPayment.getPaid()).isEqualTo(now);
+        assertThat(persistedPayment.creditCard()).isEqualTo(creditCard);
+        assertThat(persistedPayment.paid()).isEqualTo(now);
     }
 
     @Test
@@ -41,7 +41,7 @@ public class PaymentsJpaAdapterTest {
 
         var expectedCreditCard = new CreditCard("Michael Faraday", "11223344", Month.JANUARY, Year.of(2023));
 
-        assertThat(payment.getCreditCard()).isEqualTo(expectedCreditCard);
+        assertThat(payment.creditCard()).isEqualTo(expectedCreditCard);
     }
 
     @Test
