@@ -73,13 +73,6 @@ class AcceptanceTests {
     }
 
     @Test
-    void noChangesAllowedWhenOrderIsPaid() {
-        var existingOrder = orders.save(aPaidOrder());
-
-        assertThatThrownBy(() -> customer.updateOrder(existingOrder.getId(), anOrder())).isInstanceOf(IllegalStateException.class);
-    }
-
-    @Test
     void customerCanPayTheOrder() {
         var existingOrder = orders.save(anOrder());
         var creditCard = aCreditCard();
@@ -88,6 +81,14 @@ class AcceptanceTests {
 
         assertThat(payment.getOrderId()).isEqualTo(existingOrder.getId());
         assertThat(payment.getCreditCard()).isEqualTo(creditCard);
+        assertThat(orders.findOrderById(existingOrder.getId()).getStatus()).isEqualTo(Status.PAID);
+    }
+
+    @Test
+    void noChangesAllowedWhenOrderIsPaid() {
+        var existingOrder = orders.save(aPaidOrder());
+
+        assertThatThrownBy(() -> customer.updateOrder(existingOrder.getId(), anOrder())).isInstanceOf(IllegalStateException.class);
     }
 
     @Test
