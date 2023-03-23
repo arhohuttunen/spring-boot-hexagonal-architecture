@@ -42,6 +42,17 @@ class AcceptanceTests {
     }
 
     @Test
+    void customerCanOrderCoffee() {
+        var orderToMake = new Order(Location.IN_STORE, List.of(new LineItem(Drink.CAPPUCCINO, Milk.SKIMMED, Size.SMALL, 1)));
+
+        var order = customer.createOrder(orderToMake);
+
+        assertThat(order.getLocation()).isEqualTo(Location.IN_STORE);
+        assertThat(order.getItems()).containsExactly(new LineItem(Drink.CAPPUCCINO, Milk.SKIMMED, Size.SMALL, 1));
+        assertThat(order.getStatus()).isEqualTo(Status.PAYMENT_EXPECTED);
+    }
+
+    @Test
     void customerCanUpdateTheOrderBeforePaying() {
         var orderWithOneItem = new Order(Location.TAKE_AWAY, List.of(new LineItem(Drink.LATTE, Milk.WHOLE, Size.LARGE, 1)));
         var orderWithTwoItems = new Order(Location.TAKE_AWAY, List.of(new LineItem(Drink.LATTE, Milk.WHOLE, Size.LARGE, 2)));
