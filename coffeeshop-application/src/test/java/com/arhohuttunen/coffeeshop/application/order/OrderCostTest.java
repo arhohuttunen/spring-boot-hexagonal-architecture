@@ -16,7 +16,7 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
-public class OrderTest {
+public class OrderCostTest {
 
     private static Stream<Arguments> drinkCosts() {
         return Stream.of(
