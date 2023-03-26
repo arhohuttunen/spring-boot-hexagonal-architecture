@@ -1,7 +1,7 @@
 package com.arhohuttunen.coffeeshop.config;
 
-import com.arhohuttunen.coffeeshop.application.out.stubs.InMemoryOrders;
-import com.arhohuttunen.coffeeshop.application.out.stubs.InMemoryPayments;
+import com.arhohuttunen.coffeeshop.application.out.stub.InMemoryOrders;
+import com.arhohuttunen.coffeeshop.application.out.stub.InMemoryPayments;
 import com.arhohuttunen.coffeeshop.application.out.Orders;
 import com.arhohuttunen.coffeeshop.application.out.Payments;
 import org.springframework.boot.test.context.TestConfiguration;

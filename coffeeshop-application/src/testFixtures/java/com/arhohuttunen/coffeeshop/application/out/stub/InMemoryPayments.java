@@ -1,4 +1,4 @@
-package com.arhohuttunen.coffeeshop.application.out.stubs;
+package com.arhohuttunen.coffeeshop.application.out.stub;
 
 import com.arhohuttunen.coffeeshop.application.out.Payments;
 import com.arhohuttunen.coffeeshop.application.payment.Payment;
