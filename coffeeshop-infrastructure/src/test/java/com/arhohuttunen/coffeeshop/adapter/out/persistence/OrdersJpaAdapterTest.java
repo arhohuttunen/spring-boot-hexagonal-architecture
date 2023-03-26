@@ -1,7 +1,7 @@
 package com.arhohuttunen.coffeeshop.adapter.out.persistence;
 
-import com.arhohuttunen.coffeeshop.application.order.Order;
 import com.arhohuttunen.coffeeshop.application.order.LineItem;
+import com.arhohuttunen.coffeeshop.application.order.Order;
 import com.arhohuttunen.coffeeshop.application.out.Orders;
 import com.arhohuttunen.coffeeshop.shared.Drink;
 import com.arhohuttunen.coffeeshop.shared.Location;
