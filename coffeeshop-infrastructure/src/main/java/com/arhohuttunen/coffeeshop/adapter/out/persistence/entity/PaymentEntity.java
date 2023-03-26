@@ -1,4 +1,4 @@
-package com.arhohuttunen.coffeeshop.adapter.out.persistence;
+package com.arhohuttunen.coffeeshop.adapter.out.persistence.entity;
 
 import com.arhohuttunen.coffeeshop.application.payment.CreditCard;
 import com.arhohuttunen.coffeeshop.application.payment.Payment;
