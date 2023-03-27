@@ -1,6 +1,7 @@
 package com.arhohuttunen.coffeeshop.application.out.stub;
 
 import com.arhohuttunen.coffeeshop.application.order.Order;
+import com.arhohuttunen.coffeeshop.application.out.OrderNotFound;
 import com.arhohuttunen.coffeeshop.application.out.Orders;
 
 import java.util.HashMap;
@@ -12,7 +13,11 @@ public class InMemoryOrders implements Orders {
 
     @Override
     public Order findOrderById(UUID orderId) {
-        return entities.get(orderId);
+        var order = entities.get(orderId);
+        if (order == null) {
+            throw new OrderNotFound();
+        }
+        return order;
     }
 
     @Override

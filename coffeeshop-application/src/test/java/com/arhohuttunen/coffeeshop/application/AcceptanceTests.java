@@ -4,6 +4,7 @@ import com.arhohuttunen.coffeeshop.application.in.OrderingCoffee;
 import com.arhohuttunen.coffeeshop.application.in.PreparingCoffee;
 import com.arhohuttunen.coffeeshop.application.order.LineItem;
 import com.arhohuttunen.coffeeshop.application.order.Order;
+import com.arhohuttunen.coffeeshop.application.out.OrderNotFound;
 import com.arhohuttunen.coffeeshop.application.out.Orders;
 import com.arhohuttunen.coffeeshop.application.out.Payments;
 import com.arhohuttunen.coffeeshop.application.out.stub.InMemoryOrders;
@@ -69,7 +70,7 @@ class AcceptanceTests {
 
         customer.cancelOrder(existingOrder.getId());
 
-        assertThat(orders.findOrderById(existingOrder.getId())).isNull();
+        assertThatThrownBy(() -> orders.findOrderById(existingOrder.getId())).isInstanceOf(OrderNotFound.class);
     }
 
     @Test
