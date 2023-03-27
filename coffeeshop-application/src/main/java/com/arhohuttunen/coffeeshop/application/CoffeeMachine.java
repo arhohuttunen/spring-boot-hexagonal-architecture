@@ -2,6 +2,7 @@ package com.arhohuttunen.coffeeshop.application;
 
 import com.arhohuttunen.architecture.UseCase;
 import com.arhohuttunen.coffeeshop.application.in.PreparingCoffee;
+import com.arhohuttunen.coffeeshop.application.order.Order;
 import com.arhohuttunen.coffeeshop.application.out.Orders;
 
 import java.util.UUID;
@@ -15,16 +16,16 @@ public class CoffeeMachine implements PreparingCoffee {
     }
 
     @Override
-    public void startPreparingOrder(UUID orderId) {
+    public Order startPreparingOrder(UUID orderId) {
         var order = orders.findOrderById(orderId);
 
-        orders.save(order.markBeingPrepared());
+        return orders.save(order.markBeingPrepared());
     }
 
     @Override
-    public void finishPreparingOrder(UUID orderId) {
+    public Order finishPreparingOrder(UUID orderId) {
         var order = orders.findOrderById(orderId);
 
-        orders.save(order.markPrepared());
+        return orders.save(order.markPrepared());
     }
 }

@@ -107,26 +107,26 @@ class AcceptanceTests {
     void baristaCanStartPreparingTheOrderWhenItIsPaid() {
         var existingOrder = orders.save(aPaidOrder());
 
-        barista.startPreparingOrder(existingOrder.getId());
+        var orderInPreparation = barista.startPreparingOrder(existingOrder.getId());
 
-        assertThat(existingOrder.getStatus()).isEqualTo(Status.PREPARING);
+        assertThat(orderInPreparation.getStatus()).isEqualTo(Status.PREPARING);
     }
 
     @Test
     void baristaCanMarkTheOrderReadyWhenSheIsFinishedPreparing() {
         var existingOrder = orders.save(anOrderInPreparation());
 
-        barista.finishPreparingOrder(existingOrder.getId());
+        var preparedOrder = barista.finishPreparingOrder(existingOrder.getId());
 
-        assertThat(existingOrder.getStatus()).isEqualTo(Status.READY);
+        assertThat(preparedOrder.getStatus()).isEqualTo(Status.READY);
     }
 
     @Test
     void customerCanTakeTheOrderWhenItIsReady() {
         var existingOrder = orders.save(aReadyOrder());
 
-        customer.takeOrder(existingOrder.getId());
+        var takenOrder = customer.takeOrder(existingOrder.getId());
 
-        assertThat(existingOrder.getStatus()).isEqualTo(Status.TAKEN);
+        assertThat(takenOrder.getStatus()).isEqualTo(Status.TAKEN);
     }
 }
