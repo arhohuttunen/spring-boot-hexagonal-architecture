@@ -2,6 +2,7 @@ package com.arhohuttunen.coffeeshop.adapter.out.persistence.config;
 
 import com.arhohuttunen.architecture.UseCase;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -20,12 +21,11 @@ public class TransactionalUseCaseAspect {
 
     @Around("inUseCase(useCase)")
     Object useCase(ProceedingJoinPoint proceedingJoinPoint, UseCase useCase) {
-        return transactionalUseCaseExecutor.executeInTransaction(() -> {
-            try {
-                return proceedingJoinPoint.proceed();
-            } catch (Throwable e) {
-                throw new RuntimeException(e);
-            }
-        });
+        return transactionalUseCaseExecutor.executeInTransaction(() -> proceed(proceedingJoinPoint));
+    }
+
+    @SneakyThrows
+    private static Object proceed(ProceedingJoinPoint joinPoint) {
+        return joinPoint.proceed();
     }
 }
