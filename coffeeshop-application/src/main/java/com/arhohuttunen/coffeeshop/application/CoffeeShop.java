@@ -28,11 +28,6 @@ public class CoffeeShop implements OrderingCoffee {
     }
 
     @Override
-    public Order readOrder(UUID orderId) {
-        return orders.findOrderById(orderId);
-    }
-
-    @Override
     public Order updateOrder(UUID orderId, Order order) {
         var existingOrder = orders.findOrderById(orderId);
 

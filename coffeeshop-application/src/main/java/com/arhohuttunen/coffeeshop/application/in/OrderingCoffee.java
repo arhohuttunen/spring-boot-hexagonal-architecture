@@ -9,7 +9,6 @@ import java.util.UUID;
 
 public interface OrderingCoffee {
     Order placeOrder(Order order);
-    Order readOrder(UUID orderId);
     Order updateOrder(UUID orderId, Order order);
     void cancelOrder(UUID orderId);
     Payment payOrder(UUID orderId, CreditCard creditCard);

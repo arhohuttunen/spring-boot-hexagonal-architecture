@@ -8,7 +8,6 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import static com.arhohuttunen.coffeeshop.application.order.OrderTestFactory.anOrder;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -47,14 +46,6 @@ public class OrderControllerTest {
         mockMvc.perform(post("/order/{id}", order.getId())
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .content(orderJson))
-                .andExpect(status().isOk());
-    }
-
-    @Test
-    void readOrder() throws Exception {
-        var order = orders.save(anOrder());
-
-        mockMvc.perform(get("/order/{id}", order.getId()))
                 .andExpect(status().isOk());
     }
 

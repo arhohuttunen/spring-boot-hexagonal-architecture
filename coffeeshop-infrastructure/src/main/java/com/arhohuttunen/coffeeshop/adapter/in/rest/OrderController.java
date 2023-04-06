@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,11 +34,6 @@ public class OrderController {
         return ResponseEntity.ok(OrderResponse.fromDomain(order));
     }
 
-    @GetMapping("/order/{id}")
-    ResponseEntity<OrderResponse> readOrder(@PathVariable UUID id) {
-        var order = orderingCoffee.readOrder(id);
-        return ResponseEntity.ok(OrderResponse.fromDomain(order));
-    }
     @DeleteMapping("/order/{id}")
     ResponseEntity<Void> cancelOrder(@PathVariable UUID id) {
         orderingCoffee.cancelOrder(id);
