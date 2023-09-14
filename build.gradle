@@ -4,7 +4,10 @@ plugins {
 
 group = 'com.arhohuttunen'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '17'
+
+compileJava {
+    sourceCompatibility = '17'
+}
 
 allprojects {
     repositories {
