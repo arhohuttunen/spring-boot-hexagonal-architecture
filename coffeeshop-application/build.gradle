@@ -1,9 +1,18 @@
 plugins {
     id 'java'
+    id 'jvm-test-suite'
     id "java-test-fixtures"
 }
 
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
     testImplementation 'org.assertj:assertj-core:3.24.2'
+}
+
+testing {
+    suites {
+        test {
+            useJUnitJupiter()
+        }
+    }
 }
