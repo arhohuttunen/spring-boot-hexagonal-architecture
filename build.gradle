@@ -1,12 +1,14 @@
 plugins {
-    id 'java'
+    id 'java-library'
 }
 
 group = 'com.arhohuttunen'
 version = '0.0.1-SNAPSHOT'
 
-compileJava {
-    sourceCompatibility = '17'
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
 }
 
 allprojects {
