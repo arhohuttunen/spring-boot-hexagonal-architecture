@@ -7,12 +7,5 @@ plugins {
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.11.3'
     testImplementation 'org.assertj:assertj-core:3.26.3'
-}
-
-testing {
-    suites {
-        test {
-            useJUnitJupiter()
-        }
-    }
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
